@@ -1,0 +1,4 @@
+    
+<launch>
+    <node name="setpoint_transformer" pkg="clark_odom" type="setpoint_transformer.py" output="screen"/>
+</launch>

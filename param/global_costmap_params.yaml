@@ -1,0 +1,14 @@
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+  update_frequency: 5
+  publish_frequency: 5
+  static_map: true
+  footprint_padding: 0.1
+
+  inflation_layer:
+    inflate_unknown: true
+
+  plugins:
+    - {name: static_layer,    type: "rtabmap_costmap_plugins::StaticLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}

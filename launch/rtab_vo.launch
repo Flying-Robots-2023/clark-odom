@@ -1,0 +1,38 @@
+
+<launch>
+
+    <!-- To connect rtabmap planning stuff with move_base below -->
+    <param name="/rtabmap/rtabmap/use_action_for_goal" value="true"/>
+    <remap from="/rtabmap/move_base" to="/move_base"/>
+
+  <!-- Load RTAB-Map's visual odometry node -->
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+        <!-- Camera args -->
+        <arg name="rgb_topic" value="/camera/color/image_raw"/>
+        <arg name="depth_topic" value="/camera/aligned_depth_to_color/image_raw"/>
+        <arg name="camera_info_topic" value="/camera/color/camera_info"/>
+        <arg name="depth_camera_info_topic" value="/camera/depth/camera_info"/>
+
+        <arg name="rtabmapviz" value="false"/>
+        <arg name="rviz" value="false"/>
+        <arg name="compressed" value="false"/>
+        <arg name="approx_sync"       value="false"/>
+        <arg name="frame_id" value="base_link_frd" />
+        <arg name="odom_frame_id" value="odom" />
+        <arg name="map_frame_id" value="map" />
+
+  </include>
+
+  <!-- RTAB-Map Optimization Parameters -->
+  <!-- Set RTAB-Map Optimization Parameters directly using rosparam -->
+    <rosparam param="Odom/Stragetgy">1</rosparam>
+    <rosparam param="Kp/MaxFeatures">400</rosparam>
+    <rosparam param="Kp/DetectorStrategy">ORB</rosparam>
+    <rosparam param="Rtabmap/TimeThr">700</rosparam>
+    <rosparam param="RGBD/LoopClosureThreshold">0.16</rosparam>
+    <rosparam param="Mem/STMSize">30</rosparam>
+    <rosparam param="Mem/UseOdomFeatures">true</rosparam>
+    <rosparam param="Grid/FromDepth">true</rosparam>
+    <rosparam param="Grid/RangeMax">4.0</rosparam>
+    <rosparam param="Grid/CellSize">0.05</rosparam>
+</launch>

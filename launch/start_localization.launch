@@ -1,0 +1,17 @@
+<launch>
+
+    <!-- Load EKF parameters -->
+    <rosparam file="$(find clark_odom)/config/ekf_params.yaml" command="load"/>
+
+    <!-- Launch the ekf_localization_node -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+        <!-- Input topics -->
+        <remap from="/odometry/filtered" to="/mavros/odometry/out"/>
+        <remap from="/imu/data" to="/mavros/imu/data"/>
+    </node>
+
+  <!-- <node pkg="clark_odom" type="location.py" name="location"/> -->
+
+  <node pkg="topic_tools" type="relay" name="odometry_relay" args="/rtabmap/odom /mavros/odometry/out"/>
+
+</launch>

@@ -1,0 +1,3 @@
+<launch>
+<node pkg="topic_tools" type="relay" name="rtabmap_to_mavros_pose_relay" args="/converted_pose /mavros/local_position/pose"/>
+</launch>
